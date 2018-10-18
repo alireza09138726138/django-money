@@ -1,0 +1,166 @@
+{% extends "djangobin/base.html" %}
+
+{% block title %}
+    Login - {{ block.super }}
+{% endblock %}
+{% block main %}</strong></p>
+
+{% if books %}
+<p><b>TOTAL BUY:</b> <i>{{ books|length }}</i> </p>{% endif %}
+
+
+
+<table class="table "> 
+
+	
+        <thead>
+        <tr>
+            <th>Bank</th>
+            
+            
+        </tr>
+        </thead>
+        <tbody>
+ 
+        
+            <tr>
+                <td><form action="/seeyeard/" method="get">   
+
+                   
+{% csrf_token %}
+                    <table class="table w3-grey">
+				
+				<tr>
+                            <th><label for="id_username">year:</label></th>
+   <td>
+  
+    <select name="yea" required="">
+        <option disabled="" selected="">Select year</option>
+        <option value="2018">2018</option>
+        <option value="2019">2019</option>
+        <option value="2020">2020</option>
+		<option value="2021">2021</option>
+        <option value="2022">2022</option>
+        <option value="2023">2023</option>
+		<option value="2024">2024</option>
+        <option value="2025">2025</option>
+        <option value="2026">2026</option>
+		<option value="2027">2027</option>
+        <option value="2028">2028</option>
+        <option value="2029">2029</option>
+    </select>
+   
+						</td>
+                        </tr>
+						
+						<tr>
+                            <th><label for="id_username">month:</label></th>
+   <td>
+   
+   <select name="month" required="">
+        <option disabled="" selected="">Select month</option>
+        <option value="01">01</option>
+        <option value="02">02</option>
+        <option value="03">03</option>
+		<option value="04">04</option>
+        <option value="05">05</option>
+        <option value="06">06</option>
+		<option value="07">07</option>
+        <option value="08">08</option>
+        <option value="09">09</option>
+		<option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+    </select>
+   
+						</td>
+                        </tr>
+						
+						<tr>
+                            <th><label for="id_username">day:</label></th>
+   <td>
+						
+						<select name="day" required="">
+        <option disabled="" selected="">Select day</option>
+        <option value="01">01</option>
+        <option value="02">02</option>
+        <option value="03">03 </option>
+		
+		<option value="04">04</option>
+        <option value="05">05</option>
+        <option value="06">06 </option>
+		<option value="07">07</option>
+        <option value="08">08</option>
+        <option value="09">09 </option>
+		<option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+		<option value="13">13</option>
+        <option value="14">14</option>
+        <option value="15">15</option>
+		<option value="16">16</option>
+        <option value="17">17</option>
+        <option value="18">18</option>
+		<option value="19">19</option>
+        <option value="20">20</option>
+        <option value="21">21</option>
+		<option value="22">22</option>
+        <option value="23">23</option>
+        <option value="24">24</option>
+		<option value="25">25</option>
+        <option value="26">26</option>
+        <option value="27">27</option>
+		<option value="28">28</option>
+		<option value="29">29</option>
+        <option value="30">30</option>
+        <option value="31">31</option>
+    </select>
+						
+						
+						</td>
+                        </tr>
+	
+                        <tr>
+                            <th></th>
+    <td><input type="hidden" name="Bank" id="id_username" required value='{% for book in books %}{{ book.Bank }}{% endfor %}' /></td>
+                        </tr>
+                        <tr>
+                            <th></th>
+ <td><input type="hidden" name="Account" id="id_password" required value='{% for book in books %}{{ book.Account }}{% endfor %}' /></td>
+                        </tr>
+						
+						
+						
+                        <tr>
+                            <td><input type="hidden" name="next" value="{{ next }}"></td>
+                            <td><button type="submit" class="btn btn-primary">Submit</button></td>
+                        </tr>
+                    </table>
+
+                </form>	</td>
+                
+                
+
+            </tr>
+        
+        </tbody>
+    </table>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+<style>
+
+
+
+</style>		
+	
+	
+	{% endblock %}

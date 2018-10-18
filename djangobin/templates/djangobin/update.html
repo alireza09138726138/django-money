@@ -1,0 +1,96 @@
+{% extends "djangobin/base.html" %}
+
+{% block title %}
+    Login - {{ block.super }}
+{% endblock %}
+
+
+{% block main %}
+
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+
+            <h4>Login</h4>
+            <hr>
+
+           
+               
+                   {% for message in messages %}
+                    <p class="alert alert-info">{{ message }}</p>
+                {% endfor %}  
+                
+ <form action="/edit/" method="get">
+
+               
+                    <table class="table">
+					
+					<tr>
+                            <th></th>
+   <td><input type="hidden" name="Cost" id="id_username" value='{% for book in books %}{{ book.Cost }}{% endfor %}' required />
+						</td>
+                        </tr>
+	
+                        <tr>
+                            <th><label for="id_username">Bank:</label></th>
+    <td><input type="text" name="Bank" id="id_username" required value='{% for book in books %}{{ book.Bank }}{% endfor %}' /></td>
+                        </tr>
+                        <tr>
+                            <th></th>
+ <td><input type="hidden" name="Account" id="id_password" required value='{% for book in books %}{{ book.Account }}{% endfor %}' /></td>
+                        </tr>
+						
+						<tr>
+                            <th></th>
+ <td><input type="hidden" name="id" id="id_password" required value='{% for book in books %}{{ book.id }}{% endfor %}' /></td>
+                        </tr>
+						
+                        <tr>
+                            <td><input type="hidden" name="next" value="{{ next }}"></td>
+                            <td><button type="submit" class="btn btn-primary">Submit</button></td>
+                        </tr>
+                    </table>
+
+                </form>	
+				
+				
+				
+	<style>
+	input[type=text],input[type=number] {
+	
+	width: 100%;
+    padding: 12px 20px;
+    border: 2px solid gray;
+    border-radius: 4px;
+	color:black
+}
+
+input[type=text]:focus {
+    background-color: lightblue;
+}
+
+input[type=number]:focus {
+    background-color: lightblue;
+}
+
+
+	</style>			
+				
+				
+				
+				
+				
+				
+				
+    
+		
+		
+		
+		
+		
+		
+		
+       
+</div>
+    </div>
+
+{% endblock %}

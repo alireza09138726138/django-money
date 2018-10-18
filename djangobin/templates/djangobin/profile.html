@@ -1,0 +1,67 @@
+{% extends 'djangobin/base.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block main %}
+
+    <div class="media post-meta">
+        
+        <div class="media-body">
+            <h4 class="media-heading">{{ user.username|capfirst }}'s Pastes</h4>
+            <p>
+                <i class="fas fa-calendar-alt" data-toggle="tooltip" title="" data-original-title="Account creation date" ></i> {{ user.date_joined }} &nbsp;
+                <i class="fas fa-eye" data-toggle="tooltip" title="" data-original-title="Visits to this page"></i> {{ user.profile.views }} &nbsp;
+            </p>
+        </div>
+    </div>
+
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Bank</th>
+            
+            <th>Account</th>
+            <th class="hidden-md">Comment</th>
+            <th class="hidden-md">Product_name</th>
+            <th class="hidden-md">Price</th>
+			<th>Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for snippet in snippets %}
+            <tr>
+                <td><i class="fas fa-globe"></i>
+                    {{ snippet.Bank|default:"Untitled" }}
+                </td>
+                
+                <td>{{ snippet.Account }}</td>
+                <td>{{ snippet.Comment|capfirst }}</td>
+                <td>{{ snippet.Product_name|capfirst }}</td>
+                <td>{{ snippet.Price }}</td>
+                <td>{{ snippet.created_on|naturaltime }}</td>
+			</tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {#  display pagination links  #}
+    {% if snippets.paginator.num_pages > 1 %}
+        <nav aria-label="...">
+            <ul class="pager">
+
+                <li>Page {{ snippets.number }} of {{ snippets.paginator.num_pages }}</li>
+
+                {% if snippets.has_previous %}
+                    <li><a href="?page={{ snippets.previous_page_number }}">Previous</a></li>
+                {% endif %}
+
+                {% if snippets.has_next %}
+                    <li><a href="?page={{ snippets.next_page_number }}">Next</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
+
+{% endblock %}

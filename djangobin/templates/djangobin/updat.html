@@ -1,0 +1,77 @@
+{% extends "djangobin/base.html" %}
+
+{% block title %}
+    Login - {{ block.super }}
+{% endblock %}
+
+
+{% block main %}
+
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+
+            <h4>Login</h4>
+            <hr>
+
+           
+               
+                   {% for message in messages %}
+                    <p class="alert alert-info">{{ message }}</p>
+                {% endfor %}  
+                
+ <form action="/edi/" method="get">
+
+               
+                    <table class="table">
+					
+					<tr>
+                            <th><label for="id_password">Cost:</label></th>
+   <td><input type="number" name="Cost" id="id_username" value='{% for book in books %}{{ book.Cost }}{% endfor %}' required />
+						</td>
+                        </tr>
+	
+                        <tr>
+                            <th></th>
+    <td><input type="hidden" name="Bank" id="id_username" required value='{% for book in books %}{{ book.Bank }}{% endfor %}' /></td>
+                        </tr>
+                        <tr>
+                            <th><label for="id_password">Account:</label></th>
+ <td><input type="text" name="Account" id="id_password" required value='{% for book in books %}{{ book.Account }}{% endfor %}' /></td>
+                        </tr>
+						
+						<tr>
+                            <th></th>
+ <td><input type="hidden" name="id" id="id_password" required value='{% for book in books %}{{ book.id }}{% endfor %}' /></td>
+                        </tr>
+						
+                        <tr>
+                            <td><input type="hidden" name="next" value="{{ next }}"></td>
+                            <td><button type="submit" class="btn btn-primary">Submit</button></td>
+                        </tr>
+                    </table>
+
+                </form>	
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+    
+		
+		
+		
+		
+		
+		
+		
+       
+</div>
+    </div>
+
+{% endblock %}

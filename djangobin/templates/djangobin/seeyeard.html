@@ -1,0 +1,52 @@
+{% extends "djangobin/base.html" %}
+
+{% block title %}
+    Login - {{ block.super }}
+{% endblock %}
+{% block main %}</strong></p>
+
+{% if books %}
+<p><b>TOTAL BUY:</b> <i>{{ books|length }}</i> </p>{% endif %}
+
+
+
+<table class="table"> 
+
+	
+        <thead>
+        <tr class='w3-grey'>
+            <th>Product_name</th>
+			
+			<th>Price</th>
+			<th>Cost(remain)</th>
+			
+            <th>Date</th>
+			<th>Comment</th>
+            
+        </tr>
+        </thead>
+        <tbody>
+ 
+        {% for book in books %} 
+            <tr>
+			
+			 <div class="container">
+                <td>{{ book.Product_name }}</td>
+				
+				<td>{{ book.Price }}</td>
+				<td>{{ book.Cost }}</td>
+				
+				<td>{{ book.created_on|date:"Y-m-d H:i" }}</td>
+				<td>{{ book.Comment }}</td>
+</div>
+		 </tr>
+        {% empty %}
+            <tr class="text-center">
+                <td colspan="4">There are no snippets.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+	
+	
+	{% endblock %}

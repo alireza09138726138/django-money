@@ -1,0 +1,52 @@
+
+<p>You searched for: <strong>{{ query }} & {{ query1 }} & {% for book in books %}{{ book.Cost }} & {{ book.id }}{% endfor %}</strong></p>
+
+{% if books %}
+    <p>Found {{ books|length }} book{{ books|pluralize }}.</p>  
+    <ul>
+        {% for book in books %}
+        <li>{{ book.Bank }}</li>
+		 <li>{{ book.Account }}</li>
+		 <li>{{ book.Cost }}</li>
+		 <li>{{ book.Price }}-{{ book.m }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No books matched your search criteria.</p>  
+{% endif %}
+
+
+{% if error %}
+        <p style="color: red;">Please submit a search term.</p>  <h1>{{ total }} </h1>
+    {% endif %}
+	                       {{ n }}  {% for book in n %}{{ book.Cost }} & {{ book.id }}{% endfor %}
+	
+	 
+
+
+<form action="/buye/" method="get">  
+
+                   
+{% csrf_token %}
+                    <table class="table">
+					<tr>
+                            <th><label for="id_username">Cost:</label></th>
+   <td><input type="text" name="Cost" id="id_username" value='' required />
+						</td>
+                        </tr>
+	
+                        <tr>
+                            <th><label for="id_username">Bank:</label></th>
+    <td><input type="text" name="Bank" id="id_username" required value='' /></td>
+                        </tr>
+                        <tr>
+                            <th><label for="id_password">Account:</label></th>
+ <td><input type="text" name="Account" id="id_password" required value='' /></td>
+                        </tr>
+                        <tr>
+                            <td><input type="hidden" name="next" value="{{ next }}"></td>
+                            <td><button type="submit" class="btn btn-primary">Submit</button></td>
+                        </tr>
+                    </table>
+
+                </form>	

@@ -1,0 +1,72 @@
+{% extends 'djangobin/base.html' %}
+
+{% load static %}
+
+{% block main %}
+
+
+
+
+<form action=""  class="form-horizontal w3-container w3-card-4 w3-light-grey w3-text-blue w3-margin" method="post">  
+
+        {% csrf_token %}
+
+        {{ form.original_code.errors }}
+
+        {{ form.original_code }}
+
+        <hr>
+		
+		{% for choice in form.Bank.field.queryset  %}
+    {{ choice.0 }}
+{% endfor %}
+		
+
+        <div class="form-group">
+            <label for="{{ form.language.id_for_label }}" class="col-sm-2 control-label">Bank :</label>
+            <div class="col-lg-10 col-md-10 col-sm-10">
+                {{ form.Bank }}  
+				
+            </div>
+        </div>
+		
+		
+
+        {{ form.Account.errors }}
+
+        <div class="form-group">
+            <label for="{{ form.expiration.id_for_label }}" class="col-sm-2  control-label">Account :</label>
+            <div class="col-lg-10 col-md-10 col-sm-10">
+                {{ form.Account }}
+            </div>
+        </div>
+		
+
+        {{ form.Cost.errors }}  
+
+        <div class="form-group">
+            <label for="{{ form.exposure.id_for_label }}" class="col-sm-2  control-label">Cost :</label>
+            <div class="col-lg-10 col-md-10 col-sm-10">
+                {{ form.Cost }}
+            </div>
+        </div>
+
+        
+
+
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label"></label>
+            <div class="col-lg-10 col-md-10 col-sm-10">
+                
+            <input type="submit" name='submit' class="w3-btn w3-hover-purple" value="submit" 
+			style='background-color: blue ;color:white;border:2px solid gray'>
+			</div>
+        </div>
+
+    </form>
+	
+	
+	
+
+
+{% endblock %}

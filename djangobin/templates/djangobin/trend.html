@@ -1,0 +1,67 @@
+{% extends 'djangobin/base.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block title %}
+    Trending {{ lang.name }} Snippets - {{ block.super }}
+{% endblock %}
+
+{% block main %}
+
+    <h5><i class="fas fa-chart-line"></i> Trending {{ lang.name }} Snippets</h5>   
+    <hr>
+{% for message in messages %}
+                    <p class="alert alert-info">{{ message }}</p>
+                {% endfor %} 
+	
+	
+	
+	{% for snippet in snippets %}
+						 
+						 <form action="/asdd/" method="get">    
+                 <label for="id_password"><span class='' style='color:blue'>Product_name</span>: {{ snippet.Product_name }}----</label>
+       <input type="hidden" name="Product_name" value='{{ snippet.Product_name }}'> 
+<label for="id_password"><span class='' style='color:blue'>Comment</span>: {{ snippet.Comment }}</label>----	   
+		<input type="hidden" name="Comment" value='{{ snippet.Comment }}'>
+		
+		<label for="id_password"><span class='' style='color:blue'>Price:</span> {{ snippet.Price }}</label>----
+		 <input type="hidden" name="user" value='{{ snippet.Price }}'>
+		 <label for="id_password"><span class='' style='color:blue'>Cost:</span> {{ snippet.Cost }}</label>----
+		 <input type="hidden" name="user" value='{{ snippet.Cost }}'>
+       <input type="submit" value="delete" onclick=" return confirm('Are you sure ?')"><br>
+    </form>
+	 
+		{% empty %}
+            <tr class="text-center">
+                <td colspan="4">There are no snippets.</td>
+            </tr>
+        {% endfor %}
+	<br></br>
+    
+                     {##<--  -->##}
+
+	
+
+		
+{% if snippets.paginator.num_pages > 1 %}
+        <nav aria-label="...">
+            <ul class="pager">
+
+                <li>Page {{ snippets.number }} of {{ snippets.paginator.num_pages }}</li>
+
+                {% if snippets.has_previous %}
+                    <li><a href="?page={{ snippets.previous_page_number }}">Previous</a></li>
+                {% endif %}
+
+                {% if snippets.has_next %}
+                    <li><a href="?page={{ snippets.next_page_number }}">Next</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
+	
+	
+	
+
+{% endblock %}

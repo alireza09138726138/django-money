@@ -1,0 +1,88 @@
+{% extends "djangobin/base.html" %}
+
+{% block title %}
+    Login - {{ block.super }}
+{% endblock %}
+
+
+{% block main %}
+
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+
+            <h4>Login</h4>
+            <hr>
+
+           
+               
+                   {% for message in messages %}
+                    <p class="alert alert-info">{{ message }}</p>
+                {% endfor %}  
+                
+            
+            
+		
+               <form action="/costt/" method="post">
+
+                  {% csrf_token %} 
+{{ form.original_code.errors }}
+{{ form.errors }}
+                    <table class="table">
+					
+					
+					
+					 <tr>
+                            <th><label for="id_password">Price:</label></th>
+ <td><input type="number" name="Price" id="id_password" required value='' /></td>
+                        </tr>
+						
+						<tr>
+                            <th><label for="id_username">Product_name:</label></th>
+    <td><input type="text" name="Product_name" id="id_username" required value='' /></td>
+                        </tr>
+					
+					
+					<tr>
+                            <th><label for="id_username">Comment:</label></th>
+   <td><textarea rows="4" cols="50" name="Comment" id="id_username" value='' required /></textarea>
+						</td>
+                        </tr>
+					
+					
+					
+					
+					<tr>
+                            <th><label for="id_username">Cost(remain): {% for book in books %}{{ book.Cost }}{% endfor %}</label></th>
+   <td><input type="hidden" name="Cost" id="id_username" value='{% for book in books %}{{ book.Cost }}{% endfor %}' required />
+						</td>
+                        </tr>
+	
+                        <tr>
+                            <th></th>
+    <td><input type="hidden" name="Bank" id="id_username" required value='{% for book in books %}{{ book.Bank }}{% endfor %}' /></td>
+                        </tr>
+                        <tr>
+                            <th></th>
+ <td><input type="hidden" name="Account" id="id_password" required value='{% for book in books %}{{ book.Account }}{% endfor %}' /></td>
+                        </tr>
+                        <tr>
+                            <td><input type="hidden" name="next" value="{{ next }}"></td>
+                            <td><button type="submit" class="btn btn-primary">Submit</button></td>
+                        </tr>
+                    </table>
+
+                </form>  
+		
+		
+		
+		
+		
+		
+		
+       
+</div>
+    </div>
+	
+	
+
+{% endblock %}

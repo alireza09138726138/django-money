@@ -1,0 +1,91 @@
+{% extends "djangobin/base.html" %}
+
+{% block title %}
+    Login - {{ block.super }}
+{% endblock %}
+{% block main %}</strong></p>
+
+
+<table class="table"> 
+
+	
+       
+        <tbody>
+ 
+        
+            <tr>
+                <td><form action="/seeproduc/" method="get"  >  
+
+                   
+{% csrf_token %}
+                    <table class="table w3-grey">
+					
+						<tr>
+                            <th><label for="id_username">Select bank:</label></th>
+   <td>		                        
+ <select name="Bank" required="">{% for book in boo %}
+        <option disabled="" selected="">-----------</option>
+        <option value="{{ book.Bank }}">{{ book.Bank }}</option>{% endfor %}
+          </select></td>
+                        </tr>
+						
+						
+						
+						<tr>
+                            <th><label for="id_username">Select Account:</label></th>
+   <td>		                        
+ 
+		  
+		 <select name="Account" required="">{% for book in boo %}
+        <option disabled="" selected="">-----------</option>
+        <option value="{{ book.Account }}">{{ book.Account }}</option>{% endfor %}
+          </select>
+		  
+		  
+		  </td>
+                        </tr>
+						
+						
+						<tr>
+                            <th><label for="id_username">Select Product_name:</label></th>
+   <td>		                        
+ 
+		  
+		  <select name="Product_name" required="">{% for book in books %}
+        <option disabled="" selected="">-----------</option>
+        <option value="{{ book.Product_name }}">{{ book.Product_name }}</option>{% endfor %}
+          </select>
+		  </td>
+                        </tr>
+						
+						
+					
+					
+				
+					
+						
+						
+                        <tr>
+                            <td><input type="hidden" name="next" value="{{ next }}"></td>
+                            <td><button type="submit" class="btn btn-primary">Submit</button></td>
+                        </tr>
+                    </table>
+
+                </form>	</td>
+                
+                
+
+            </tr>
+        
+        </tbody>
+    </table>
+
+
+
+
+
+			 
+			 
+			 
+	
+	{% endblock %}

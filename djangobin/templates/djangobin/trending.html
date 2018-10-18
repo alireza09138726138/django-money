@@ -1,0 +1,137 @@
+{% extends 'djangobin/base.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block title %}
+    Trending {{ lang.name }} money lover
+{% endblock %}
+
+{% block main %}
+
+    <h5><i class="fas fa-chart-line"></i> Trending {{ lang.name }} money lover</h5>   
+    <hr>
+{% for message in messages %}
+                    <p class="alert alert-info">{{ message }}</p>
+                {% endfor %} 
+	
+
+
+	
+	
+	
+	
+	 
+<div class="container">
+{% for snippet in snippets %}
+  <div class="row">
+    <div class="col-sm-2">
+      <h3 style='background-color: blue;padding:10px 0;color:yellow' class='w3-center'>Name</h3>
+      <h4 class=' '>{{ snippet.Bank }} &
+		{{ snippet.Account }}</h4>
+    </div>
+    <div class="col-sm-2">
+      <h3 style='background-color: blue;;padding:10px 0;color:yellow' class='w3-center'>Add</h3>
+      <form action="/buy/" method="get">
+
+
+        
+        <input type="hidden" name="q" value='{{ snippet.Bank }}'>
+		<input type="hidden" name="q1" value='{{ snippet.Account }}'>
+		
+		
+		 <input type="hidden" name="user" value='{{ request.user.username }}'>
+		 
+       <input type="submit" class='w3-hover-purple w3-btn' value="buy" style='background-color: lightblue;color:black;border: 2px solid gray;'>
+    </form>
+    </div>
+    <div class="col-sm-2">
+      <h3 style='background-color: blue;;padding:10px 0;color:yellow' class='w3-center'>Edit</h3>        
+      <form action="/searchedit/" method="get">    
+ 
+        <input type="hidden" name="q" value='{{ snippet.Bank }}'>
+		<input type="hidden" name="q1" value='{{ snippet.Account }}'>
+		
+		 <input type="hidden" name="user" value='{{ request.user.username }}'>
+		 
+       <input type="submit" class='w3-hover-purple w3-btn' value="{{ snippet.Bank }}" >
+    </form>  
+<form action="/searchedi/" method="get">    
+ 
+        <input type="hidden" name="q" value='{{ snippet.Bank }}'>
+		<input type="hidden" name="q1" value='{{ snippet.Account }}'>
+		
+		 <input type="hidden" name="user" value='{{ request.user.username }}'>
+		 
+       <input type="submit" class='w3-hover-purple w3-btn' value="{{ snippet.Account }} & Cost " >
+    </form>
+    </div>
+	
+	<div class="col-sm-2">
+      <h3 style='background-color: blue;;padding:10px 0;color:yellow' class='w3-center'>Review</h3>        
+    <form action="/seeproduct/" method="get">    
+
+        <input type="hidden" name="Bank" value='{{ snippet.Bank }}'>
+		<input type="hidden" name="Account" value='{{ snippet.Account }}'>
+		 <input type="hidden" name="user" value='{{ request.user.username }}'>
+		 
+       <input type="submit" class='w3-hover-purple w3-btn' value="product">
+    </form>
+						 
+						 <form action="/searchh/" method="get">    
+
+        <input type="hidden" name="q" value='{{ snippet.Bank }}'>
+		<input type="hidden" name="q1" value='{{ snippet.Account }}'>
+		 <input type="hidden" name="user" value='{{ request.user.username }}'>
+		 
+       <input type="submit" class='w3-hover-purple w3-btn' value="all">
+    </form>
+	
+			 <form action="/searchhsee/" method="get">    
+
+        <input type="hidden" name="q" value='{{ snippet.Bank }}'>
+		<input type="hidden" name="q1" value='{{ snippet.Account }}'>
+		 <input type="hidden" name="user" value='{{ request.user.username }}'>
+		 
+       <input type="submit" class='w3-hover-purple w3-btn' value="year">
+    </form>
+
+			 <form action="/searchhseem/" method="get">    
+
+        <input type="hidden" name="q" value='{{ snippet.Bank }}'>
+		<input type="hidden" name="q1" value='{{ snippet.Account }}'>
+		 <input type="hidden" name="user" value='{{ request.user.username }}'>
+		 
+       <input type="submit" class='w3-hover-purple w3-btn' value="month">
+    </form>	
+	
+	 <form action="/searchhseed/" method="get">    
+
+        <input type="hidden" name="q" value='{{ snippet.Bank }}'>
+		<input type="hidden" name="q1" value='{{ snippet.Account }}'>
+		 <input type="hidden" name="user" value='{{ request.user.username }}'>
+		 
+       <input type="submit" class='w3-hover-purple w3-btn' value="day">
+    </form> </div>
+	
+	<div class="col-sm-2">
+      <h3 style='background-color: blue;;padding:10px 0;color:yellow' class='w3-center'>Action</h3>        
+       <form action="/asd/" method="get">    
+
+        <input type="hidden" name="q" value='{{ snippet.Bank }}'>
+		<input type="hidden" name="q1" value='{{ snippet.Account }}'>
+		 <input type="hidden" name="user" value='{{ request.user.username }}'>
+		 
+       <input type="submit" class='w3-hover-purple w3-btn' value="delete" onclick=" return confirm('Are you sure ?')" 
+	   data-toggle="modal" data-target="#modalConfirmDelete">
+	   
+	   
+    </form> </div>
+  </div>
+  
+  
+  
+  {% endfor %}
+  
+</div>
+{% endblock %}

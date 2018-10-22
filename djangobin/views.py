@@ -28,6 +28,7 @@ from datetime import timedelta,datetime
 
  #index        
 def index(request):
+  if request.user.is_authenticated:
     if request.method == "POST":
       f = SnippetForm(request.POST)
       if request.user.is_authenticated:
@@ -47,7 +48,9 @@ def index(request):
     else:
         f = SnippetForm()
     return render(request, 'djangobin/index.html', {'form': f,})
-
+  else:
+         
+         return redirect(reverse('djangobin:login'))
 
 #search	
 def search_form(request):
@@ -395,13 +398,16 @@ def Snippet_list(request):
         posts = helpers.pg_records(request, posts, 10)
 
         return render(request, 'djangobin/trending.html', {'snippets': posts})
-
+    else:
+         
+         return redirect(reverse('djangobin:login'))
 	
 
 
 	
 #contact us
 def contact(request):
+ if request.user.is_authenticated:
     if request.method == 'POST':
         f = ContactForm(request, request.POST)
         if f.is_valid():
@@ -429,6 +435,9 @@ def contact(request):
         f = ContactForm(request)
 
     return render(request, 'djangobin/contact.html', {'form': f})
+ else:
+         
+         return redirect(reverse('djangobin:login'))	
 	
 #Reverse 
 @login_required	
@@ -551,6 +560,8 @@ def search(request):
         snippets = paginate_result(request, snippet_list, 5)
 
     return render(request, 'djangobin/search.html', {'form': f, 'snippets': snippets })
+	
+
 	
 
 	

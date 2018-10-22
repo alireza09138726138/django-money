@@ -526,6 +526,7 @@ def activate_account(request, uidb64, token):
 
 #search
 def search(request):
+ if request.user.is_authenticated:
     f = SearchForm(request.GET)
     snippets = []
 
@@ -560,8 +561,6 @@ def search(request):
         snippets = paginate_result(request, snippet_list, 5)
 
     return render(request, 'djangobin/search.html', {'form': f, 'snippets': snippets })
-	
-
-	
-
-	
+ else:
+         
+         return redirect(reverse('djangobin:login'))

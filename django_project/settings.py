@@ -148,6 +148,7 @@ STATICFILES_DIR  = [
 
 SERVER_EMAIL = 'alirezamosavi346@gmail.com'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_PASSWORD = '09138726138a'
 EMAIL_HOST_USER = SERVER_EMAIL
@@ -160,13 +161,16 @@ ADMINS = [
 ]
 
 MANAGERS = ADMINS
-########################index LOGIN_REDIRECT_URL = 'djangobin:admin_page'  accounts
+########################index LOGIN_REDIRECT_URL = 'djangobin:admin_page'  logout
 
-LOGIN_REDIRECT_URL = 'djangobin:admin_page'
+LOGIN_REDIRECT_URL = 'djangobin:index'
 LOGIN_URL = 'djangobin:login'
+
 
 #...
 
 
 SITE_ID = 1
+
+
 

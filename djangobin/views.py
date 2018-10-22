@@ -26,7 +26,6 @@ from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
 from datetime import timedelta,datetime
 
-
  #index        
 def index(request):
     if request.method == "POST":
@@ -389,7 +388,8 @@ def snippet_detail(request, snippet_slug):
 
 
 def Snippet_list(request):
-    if request.user.is_superuser:
+    
+    if request.user.is_authenticated:
          
         posts = Snippet.objects.values('Bank','Account').distinct().filter(user__username=request.user.username)   
         posts = helpers.pg_records(request, posts, 10)
@@ -445,24 +445,35 @@ def admin_page(request):
     return render(request, 'djangobin/admin_page.html', {'user': posts})
 	
 	
+#logout
+	
 def login(request):
-    
-
+    if request.user.is_authenticated:
+        return redirect('djangobin:profile', username=request.user.username)
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = auth.authenticate(username=username, password=password)
 
-        if user is not None:
-            # correct username and password login the user recent_snippet
-            auth.login(request, user)
-            username = request.POST.get('username')
-            
-            return render(request, 'loggedin.html', {"username" : username})
-        else:
-            messages.error(request, 'Error wrong username/password')
+        f = LoginForm(request.POST)
+        if f.is_valid():
 
-    return redirect('djangobin:login')
+            user = User.objects.filter(email=f.cleaned_data['email'])
+
+            if user:
+                user = auth.authenticate(
+                    username=user[0].username,
+                    password=f.cleaned_data['password'],
+                )
+
+                if user:
+                    auth.login(request, user)
+                    return redirect( request.GET.get('next') or 'djangobin:index' )
+
+            messages.add_message(request, messages.INFO, 'Invalid email/password.')
+            return redirect('djangobin:login')
+
+    else:
+        f = LoginForm()
+
+    return render(request, 'djangobin/login.html', {'form': f})	
 	
  
 
@@ -472,7 +483,7 @@ def logout(request):
     auth.logout(request)
     return render(request,'djangobin/logout.html')
 
-#register
+#form
 def signup(request):
     if request.method == 'POST':
         f = CreateUserForm(request.POST)
@@ -501,6 +512,8 @@ def activate_account(request, uidb64, token):
         messages.add_message(request, messages.INFO, 'Link Expired. Contact admin to activate your account.')
 
     return redirect('djangobin:login')
+	
+	
 
 #search
 def search(request):
@@ -538,4 +551,6 @@ def search(request):
         snippets = paginate_result(request, snippet_list, 5)
 
     return render(request, 'djangobin/search.html', {'form': f, 'snippets': snippets })
+	
+
 	
